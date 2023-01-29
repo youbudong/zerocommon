@@ -21,3 +21,18 @@ func ObjectIdToStringConverter() copier.TypeConverter {
 		},
 	}
 }
+
+func StringToObjectIdConverter() copier.TypeConverter {
+	return copier.TypeConverter{
+		SrcType: copier.String,
+		DstType: primitive.ObjectID{},
+		Fn: func(src interface{}) (interface{}, error) {
+			s, ok := src.(string)
+			if !ok {
+				return nil, errors.New("src type not matching")
+			}
+
+			return primitive.ObjectIDFromHex(s)
+		},
+	}
+}
