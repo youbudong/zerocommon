@@ -17,7 +17,7 @@ func TimeToInt64() copier.TypeConverter {
 				return nil, errors.New("src type not matching")
 			}
 
-			return s.Unix(), nil
+			return s.UnixMilli(), nil
 		},
 	}
 }
