@@ -9,8 +9,8 @@ import (
 
 func TimeToInt64() copier.TypeConverter {
 	return copier.TypeConverter{
-		SrcType: copier.Time,
-		DstType: copier.Int64,
+		SrcType: time.Time{},
+		DstType: int64(0),
 		Fn: func(src interface{}) (interface{}, error) {
 			s, ok := src.(time.Time)
 			if !ok {
@@ -24,8 +24,8 @@ func TimeToInt64() copier.TypeConverter {
 
 func Int64ToTime() copier.TypeConverter {
 	return copier.TypeConverter{
-		SrcType: copier.Int64,
-		DstType: copier.Time,
+		SrcType: int64(0),
+		DstType: time.Time{},
 		Fn: func(src interface{}) (interface{}, error) {
 			s, ok := src.(int64)
 			if !ok {
