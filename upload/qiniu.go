@@ -34,3 +34,10 @@ func GenarateQiniuUploadToken(accessKey, secretKey, bucket, prefix, ossURL strin
 func generateKey(prefix string) string {
 	return prefix + time.Now().Format("200601/02/") + primitive.NewObjectID().Hex()
 }
+
+func GenarateURL(key, domain, accessKey, secretKey string) (privateAccessURL string) {
+	mac := qbox.NewMac(accessKey, secretKey)
+	deadline := time.Now().Add(time.Second * 60 * 60 * 3).Unix() //3小时有效期
+	privateAccessURL = storage.MakePrivateURL(mac, domain, key, deadline)
+	return
+}
